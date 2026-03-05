@@ -1,5 +1,4 @@
-let budget = 3500;
-const budgetDisplay = document.getElementById('budget');
+let budget = parseInt(localStorage.getItem("gameBudget"));const budgetDisplay = document.getElementById('budget');
 const roomCanvas = document.getElementById('roomCanvas');
 const itemOptions = document.getElementById('itemOptions');
 const categories = document.querySelectorAll('.category');
@@ -12,7 +11,6 @@ let tierIndexes = {
   Luxury: 0
 };
 
-const tiers = ["Basic", "Standard", "luxury"];
 
 
 let selectedFurniture = null; // currently selected item
@@ -39,10 +37,10 @@ let selectedItems = {
 const furnitureData = {
   couch: {
     Basic: [
-      { name:"Basic Couch 1", price:500, img:"/Basic/Couch/basic_couch1.png",
-        flippedImg:"Basic/Couch/basic_couch1-f.png",
-        rearImg:"Basic/Couch/basic_couch1_back.png",
-        rearImgF:"Basic/Couch/basic_couch1_back-f.png",
+      { name:"Basic Couch 1", price:500, img:"Images/Basic/Couch/basic_couch1.png",
+        flippedImg:"Images/Basic/Couch/basic_couch1-f.png",
+        rearImg:"Images/Basic/Couch/basic_couch1_back.png",
+        rearImgF:"Images/Basic/Couch/basic_couch1_back-f.png",
         width:300
       },
       { name:"Basic Couch 2", price:500, img:"Images/Basic/Couch/basic_couch2.png",
@@ -212,18 +210,18 @@ const furnitureData = {
         width: 200
       },
 
-      {name:"Standard Entertainment System 2", price:650, img: "Images/Smart-Choice/Entertainment/Smart_Choice_entertainment2.png",
-        flippedImg: "Images/Smart-Choice/Entertainment/Smart_Choice_entertainment2-f.png",
-        rearImg: "Images/Smart-Choice/Entertainment/Smart_Choice_entertainment2.png",
-        rearImgF: "Images/Smart-Choice/Entertainment/Smart_Choice_entertainment2-f.png",
-        width: 130
+      {name:"Standard Entertainment System 2", price:650, img: "Images/Standard/Entertainment/Standard_entertainment2.png",
+        flippedImg: "Images/Standard/Entertainment/Standard_entertainment2-f.png",
+        rearImg: "Images/Standard/Entertainment/Standard_entertainment2.png",
+        rearImgF: "Images/Standard/Entertainment/Standard_entertainment2-f.png",
+        width: 250
       },
 
       {name:"Standard Entertainment System 2", price:650, img: "Images/Standard/Entertainment/Standard_entertainment3.png",
         flippedImg: "Images/Standard/Entertainment/Standard_entertainment3-f.png",
         rearImg: "Images/Standard/Entertainment/Standard_entertainment3.png",
         rearImgF: "Images/Standard/Entertainment/Standard_entertainment3-f.png",
-        width: 130
+        width: 250
 
       }
 
@@ -234,20 +232,20 @@ const furnitureData = {
       flippedImg:"Images/Luxury/Entertainment/luxury_entertainment1-f.png",
       rearImg: "Images/Luxury/Entertainment/luxury_entertainment1.png",
       rearImgF: "Images/Luxury/Entertainment/luxury_entertainment1-f.png",
-      width:130
+      width:300
     },
       {name:"Luxury Entertainment System 2", price:1200, img:"Images/Luxury/Entertainment/luxury_entertainment2.png",
       flippedImg: "Images/Luxury/Entertainment/luxury_entertainment2-f.png",
       rearImg: "Images/Luxury/Entertainment/luxury_entertainment2.png",
       rearImgF: "Images/Luxury/Entertainment/luxury_entertainment2-f.png",
-      width:130
+      width:300
     },
 
       {name:"Luxury Entertainment System 3", price:1200, img:"Images/Luxury/Entertainment/luxury_entertainment3.png",
       flippedImg: "Images/Luxury/Entertainment/luxury_entertainment3-f.png",
       rearImg: "Images/Luxury/Entertainment/luxury_entertainment3.png",
       rearImgF: "Images/Luxury/Entertainment/luxury_entertainment3-f.png",
-      width:150
+      width:300
     },
 
     ]
@@ -366,7 +364,7 @@ const furnitureData = {
       flippedImg: "Images/Standard/Carpet/Standard_carpet3-f.png",
       rearImg: "Images/Standard/Carpet/Standard_carpet3.png",
       rearImgF: "Images/Standard/Carpet/Standard_carpet3-f.png",
-      width:150
+      width:400
       }
 
     ],
@@ -471,8 +469,9 @@ function updateBudgetDisplay() {
 //make draggable
 function makeDraggable(element) {
 
-  element.onmousedown = function(e) {
-    e.preventDefault();
+  element.style.touchAction = "none";
+
+  element.addEventListener("pointerdown", function(e) {
 
     selectedFurniture = element;
     showSelectionOutline(element);
@@ -480,7 +479,7 @@ function makeDraggable(element) {
     element.style.cursor = "grabbing";
 
     const type = element.dataset.type;
-    element.style.zIndex = 1000; // bring to front while dragging
+    element.style.zIndex = 1000;
 
     const rect = element.getBoundingClientRect();
     const canvasRect = roomCanvas.getBoundingClientRect();
@@ -488,36 +487,32 @@ function makeDraggable(element) {
     let shiftX = e.clientX - rect.left;
     let shiftY = e.clientY - rect.top;
 
-    function moveAt(pageX, pageY) {
+    function moveAt(clientX, clientY) {
+
       element.style.left =
-        pageX - shiftX - canvasRect.left + "px";
+        clientX - shiftX - canvasRect.left + "px";
 
       element.style.top =
-        pageY - shiftY - canvasRect.top + "px";
+        clientY - shiftY - canvasRect.top + "px";
     }
 
-    function onMouseMove(e) {
+    function onPointerMove(e) {
       moveAt(e.clientX, e.clientY);
     }
 
-    // ✅ listen globally
-    document.addEventListener("mousemove", onMouseMove);
-
     function stopDrag() {
-      document.removeEventListener("mousemove", onMouseMove);
-      document.removeEventListener("mouseup", stopDrag);
+      document.removeEventListener("pointermove", onPointerMove);
+      document.removeEventListener("pointerup", stopDrag);
 
       element.style.cursor = "grab";
-
-      // restore correct layer
       element.style.zIndex = layerOrder[type];
     }
 
-    // ✅ mouseup MUST be on document
-    document.addEventListener("mouseup", stopDrag);
-  };
+    document.addEventListener("pointermove", onPointerMove);
+    document.addEventListener("pointerup", stopDrag);
 
-  element.ondragstart = () => false;
+  });
+
 }
 
 // Highlight selected furniture with auto-remove after 5s
@@ -590,8 +585,8 @@ function buyItem(type, item) {
     table: { top: '250px', left: '100px' },
     Lighting: { top: '200px', left: '100px' },
     entertainment: {top: '100px', left:'100px'},
-    rugs: {tops:'300px', left:'100px'},
-    paintings: {tops:'300px',left:'100px'}
+    rugs: {top:'300px', left:'100px'},
+    paintings: {top:'300px',left:'100px'}
   };
   imgElem.style.top = anchors[type].top;
   imgElem.style.left = anchors[type].left;
@@ -626,12 +621,20 @@ changeViewBtn.addEventListener('click', () => {
 });
 
 // Finish room button
-document.getElementById('finishRoom').addEventListener('click', () => {
-  alert(`Room complete! Remaining budget: $${budget}`);
-});
 
+document.getElementById('finishRoom').addEventListener('click', () => {
+
+  if (budget >= 0) {
+    alert(`✅ Room Approved!\nCode: (200)\nBudget Remaining: $${budget}`);
+  } else {
+    alert("❌ Over Budget! Try Again");
+  }
+
+});
 // Initialize budget
 updateBudgetDisplay();
+
+
 
 
 function showCurrentItem() {
@@ -691,3 +694,43 @@ function showCurrentItem() {
     itemOptions.appendChild(viewer);
   });
 };
+
+document.getElementById("resetRoom").addEventListener("click",resetRoom);
+
+function resetRoom() {
+  localStorage.setItem("gameBudget", budget);
+
+  // Remove only furniture, NOT room background
+  document.querySelectorAll("#roomCanvas img:not(#roomImage)")
+    .forEach(img => img.remove());
+
+  selectedItems = {
+    couch: null,
+    table: null,
+    Lighting: null,
+    paintings: null,
+    entertainment: null,
+    rugs: null
+  };
+
+  selectedFurniture = null;
+
+  tierIndexes = {
+    Basic: 0,
+    Standard: 0,
+    Luxury: 0
+  };
+
+  updateBudgetDisplay();
+  itemOptions.innerHTML = "";
+}
+
+function backtoDice() {
+  localStorage.removeItem("budget");
+
+  resetRoom();
+
+  window.location.href = "dice.html";
+}
+
+
