@@ -38,9 +38,9 @@ const furnitureData = {
   couch: {
     Basic: [
       { name:"Basic Couch 1", price:500, img:"Basic/Couch/basic_couch1.png",
-        flippedImg:"Images/Basic/Couch/basic_couch1-f.png",
-        rearImg:"Images/Basic/Couch/basic_couch1_back.png",
-        rearImgF:"Images/Basic/Couch/basic_couch1_back-f.png",
+        flippedImg:"Basic/Couch/basic_couch1-f.png",
+        rearImg:"Basic/Couch/basic_couch1_back.png",
+        rearImgF:"Basic/Couch/basic_couch1_back-f.png",
         width:300
       },
       { name:"Basic Couch 2", price:500, img:"Images/Basic/Couch/basic_couch2.png",
