@@ -16,22 +16,18 @@
   <!-- ================= TOP BAR ================= -->
 <div class="topBar">
 
-  <div id = "direction" class = "direc" >
-    Stay within your budget to unlock the code
-  </div>
-<span id="budget"></span> 
+<div class="gameInfo">
+  <span id="budget"></span>
+  <div id="drawer" class="locked">🔒 Drawer Locked</div>
+  <div id="timer"></div>
+</div>
 
-        <div id="drawer" class="locked">
-  🔒 Drawer Locked
-  </div>
-
-  <div id="timer">⏱ Time Left: 30</div>
-
-<button id="resetBtn" onclick="resetRoom()">Reset Room</button>
-<button id="backtoDiceBtn" onclick="backtoDice()">Back to Dice</button>
+<div class="topButtons">
+  <button id="resetBtn" onclick="resetRoom()">Reset Room</button>
+  <button id="backtoDiceBtn" onclick="backtoDice()">Back to Dice</button>
+</div>
 
 </div>
- </header>
   
 
 
@@ -43,7 +39,7 @@
 
       <div id="roomCanvas">
         <!-- Room background -->
-        <img src="empty_room_1_2.png" id="roomImage">
+        <img src="Images/empty_room_1_2.png" id="roomImage">
         <!-- Furniture gets added here dynamically -->
       </div>
 
@@ -89,3 +85,4 @@
 
 </body>
 </html>
+
