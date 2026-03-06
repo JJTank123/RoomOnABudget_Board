@@ -39,7 +39,7 @@ const timer = setInterval(() => {
 // =======================
 
 // Category names lowercase
-const layerOrder = { rugs:0, table:1, couch:2, entertainment:3, lighting:4, paintings:5 };
+const layerOrder = { rugs:0, table:1, couch:2, entertainment:3, ing:4, paintings:5 };
 let selectedItems = { couch:null, table:null, lighting:null, paintings:null, entertainment:null, rugs:null };
 let selectedFurniture = null;
 let borderTimeout;
@@ -270,7 +270,7 @@ const furnitureData = {
     ]
   },
 
-  Lighting: {
+  lighting: {
     Basic: [
       {name:"Basic Lighting 1", price:120, img:"Basic/Lighting/basic_lighting1.png",
         flippedImg: "Basic/Lighting/basic_lighting1-f.png",
