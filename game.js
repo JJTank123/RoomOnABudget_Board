@@ -251,20 +251,20 @@ const furnitureData = {
       flippedImg:"Luxury/Entertainment/luxury_entertainment1-f.png",
       rearImg: "Luxury/Entertainment/luxury_entertainment1.png",
       rearImgF: "Luxury/Entertainment/luxury_entertainment1-f.png",
-      width:200
+      width:250
     },
       {name:"Luxury Entertainment System 2", price:1200, img:"Luxury/Entertainment/luxury_entertainment2.png",
       flippedImg: "Luxury/Entertainment/luxury_entertainment2-f.png",
       rearImg: "Luxury/Entertainment/luxury_entertainment2.png",
       rearImgF: "Luxury/Entertainment/luxury_entertainment2-f.png",
-      width:200
+      width:250
     },
 
       {name:"Luxury Entertainment System 3", price:1200, img:"Luxury/Entertainment/luxury_entertainment3.png",
       flippedImg: "Luxury/Entertainment/luxury_entertainment3-f.png",
       rearImg: "Luxury/Entertainment/luxury_entertainment3.png",
       rearImgF: "Luxury/Entertainment/luxury_entertainment3-f.png",
-      width:200
+      width:250
     },
 
     ]
@@ -383,7 +383,7 @@ const furnitureData = {
       flippedImg: "Standard/Carpet/Standard_carpet3-f.png",
       rearImg: "Standard/Carpet/Standard_carpet3.png",
       rearImgF: "Standard/Carpet/Standard_carpet3-f.png",
-      width:150
+      width:350
       }
 
     ],
