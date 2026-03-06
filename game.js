@@ -657,6 +657,20 @@ changeViewBtn.addEventListener('click', () => {
 // =======================
 finishBtn.addEventListener("click", () => {
   if (budget >= 0) {
+    // ✅ Within budget
+    const drawer = document.getElementById("drawer");
+    const codeElem = document.getElementById("drawerCode");
+
+    // Generate a simple random 4-digit code
+    const code = Math.floor(1000 + Math.random() * 9000);
+    codeElem.textContent = code;
+
+    // Show drawer
+    drawer.style.display = "block";
+
+    // Optional: give a visual effect
+    drawer.style.animation = "fadeIn 1s";
+
     alert("✅ You stayed within budget! Drawer unlocked!");
   } else {
     alert("❌ Over Budget! Try Again");
