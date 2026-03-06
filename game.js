@@ -662,8 +662,7 @@ finishBtn.addEventListener("click", () => {
 
   if (budget >= 0) {
     // ✅ Within budget
-    const code = 200; // 4-digit code
-    codeElem.textContent = `Code: ${code}`;
+    const code = Math.floor(1000 + Math.random() * 9000); // 4-digit code    codeElem.textContent = `Code: ${code}`;
     drawerStatus.textContent = "🔓 Drawer Unlocked!";
     drawer.classList.add("unlocked");
     drawer.style.display = "flex";
