@@ -569,6 +569,8 @@ function buyItem(type, item) {
   imgElem.style.top = '100px';
   imgElem.style.left = '100px';
   imgElem.style.zIndex = layerOrder[type];
+  imgElem.classList.add("furniture"); // ✅ Add this line
+
 
   makeDraggable(imgElem);
 
@@ -668,7 +670,8 @@ resetBtn.addEventListener("click", () => {
   budget = parseInt(localStorage.getItem("gameBudget")) || 1000;
   updateBudgetDisplay();
 
-  document.querySelectorAll("#roomCanvas img").forEach(img => img.remove());
+  // Only remove furniture images
+  document.querySelectorAll("#roomCanvas img.furniture").forEach(img => img.remove());
 
   selectedItems = { couch:null, table:null, lighting:null, paintings:null, entertainment:null, rugs:null };
   selectedFurniture = null;
