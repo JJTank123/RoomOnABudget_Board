@@ -172,21 +172,21 @@ const furnitureData = {
     ],
 
     Luxury: [
-      {name:"Standard Table 1", price: 750, img:"Luxury/Table/luxury_table1.png",
+      {name:"Luxury Table 1", price: 750, img:"Luxury/Table/luxury_table1.png",
         flippedImg: "Luxury/Table/luxury_table1-f.png",
         rearImg:"Luxury/Table/luxury_table1.png",
         rearImgF:"Luxury/Table/luxury_table1-f.png",
         width: 200
       },
 
-      {name:"Standard Table 2", price: 750, img:"Luxury/Table/luxury_table2.png",
+      {name:"Luxury Table 2", price: 750, img:"Luxury/Table/luxury_table2.png",
         flippedImg: "Luxury/Table/luxury_table2-f.png",
         rearImg:"Luxury/Table/luxury_table2.png",
         rearImgF:"Luxury/Table/luxury_table2-f.png",
         width: 200
       },
 
-      {name:"Standard Table 3", price: 750, img:"Luxury/Table/luxury_table3.png",
+      {name:"Luxury Table 3", price: 750, img:"Luxury/Table/luxury_table3.png",
         flippedImg: "Luxury/Table/luxury_table3-f.png",
         rearImg:"Luxury/Table/luxury_table3.png",
         rearImgF:"Luxury/Table/luxury_table3-f.png",
